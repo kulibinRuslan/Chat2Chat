@@ -9,7 +9,7 @@ export class MessageHandler {
         this.client = _client;
     }
 
-    async handleWhastAppMessage() {
+    async handleWhatsAppMessage() {
         this.client.ev.process(async (events) => {
             if (events['messages.upsert']) {
                 const upsert = events['messages.upsert'];

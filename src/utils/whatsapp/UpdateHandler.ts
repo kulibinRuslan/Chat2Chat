@@ -12,7 +12,7 @@ export class Handler {
     saveSessionPath: string = ConfigStorage.saveSessionPath
 
     async saveQr(qr) {
-        toFile('src/data/code/mainSession.png', [
+        toFile(this.saveCodePath, [
             {
                 data: qr,
                 mode: 'string',
@@ -69,7 +69,7 @@ export class Handler {
                 fs.unlinkSync(this.saveCodePath);
                 
                 setTimeout(async () => {
-                    await new MessageHandler(client).handleWhastAppMessage();
+                    await new MessageHandler(client).handleWhatsAppMessage();
                 }, 5000);
             }
         });
