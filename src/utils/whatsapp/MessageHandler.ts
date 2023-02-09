@@ -1,7 +1,7 @@
 export class MessageHandler {
     client;
 
-    constructor (_client) {
+    constructor(_client) {
         this.client = _client;
     }
 

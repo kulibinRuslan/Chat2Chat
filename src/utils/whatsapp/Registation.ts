@@ -1,9 +1,8 @@
 import { WhatsApp } from '../../clients/WhastApp';
 
-export class Registration {   
+export class Registration {
     regNumber() {
         const sock = new WhatsApp(true);
         sock.connectToWhatsApp();
     }
 }
-

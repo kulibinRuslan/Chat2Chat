@@ -1,4 +1,4 @@
-import { DisconnectReason, useMultiFileAuthState } from '@adiwajshing/baileys';
+import { DisconnectReason } from '@adiwajshing/baileys';
 import { MessageHandler } from './MessageHandler';
 import { WhatsApp } from '../../clients/WhastApp';
 import { ConfigStorage } from '../ConfigStorage';
@@ -10,11 +10,10 @@ export class UpdateHandler {
     saveCodePath: string = ConfigStorage.codeSavePath;
     saveSessionPath: string = ConfigStorage.saveSessionPath;
 
-    isRegister: boolean = false;
+    isRegister = false;
 
     saveCreds;
     client;
-
 
     constructor(_client, _saveCreds, _isRegister: boolean) {
         this.isRegister = _isRegister;
@@ -33,11 +32,7 @@ export class UpdateHandler {
 
     async remove() {
         try {
-            fs.rm(
-                this.saveSessionPath,
-                { recursive: true },
-                (_) => _
-            );
+            fs.rm(this.saveSessionPath, { recursive: true }, (_) => _);
         } catch (e) {
             const err = e as Error;
             console.log(`${err.name}: ${err.message}`);
@@ -53,7 +48,6 @@ export class UpdateHandler {
             const { qr, connection, lastDisconnect } = update;
 
             if (qr) {
-
                 this.saveQr(qr);
             }
 
@@ -62,10 +56,13 @@ export class UpdateHandler {
                     `Соединение закрыто из за ${lastDisconnect?.error?.name}: ${lastDisconnect?.error?.message}`
                 );
 
-                let shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut;
-                
-                const code = (lastDisconnect?.error as Boom)?.output?.statusCode;
-                
+                let shouldReconnect =
+                    (lastDisconnect?.error as Boom)?.output?.statusCode !==
+                    DisconnectReason.loggedOut;
+
+                const code = (lastDisconnect?.error as Boom)?.output
+                    ?.statusCode;
+
                 if (code == 403 || code == 401) {
                     this.remove();
                     shouldReconnect = false;
@@ -76,12 +73,14 @@ export class UpdateHandler {
                 }
             }
 
-            if (connection == 'open') {                
-                if (this.isRegister){
+            if (connection == 'open') {
+                if (this.isRegister) {
                     setTimeout(() => process.exit(), 3000);
                 } else {
                     setTimeout(async () => {
-                        await new MessageHandler(this.client).handleWhatsAppMessage();
+                        await new MessageHandler(
+                            this.client
+                        ).handleWhatsAppMessage();
                     }, 5000);
                 }
             }
