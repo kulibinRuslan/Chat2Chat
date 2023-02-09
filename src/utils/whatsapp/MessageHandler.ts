@@ -1,7 +1,3 @@
-import { WhatsApp } from '../../clients/WhastApp';
-import { delay } from '@adiwajshing/baileys';
-import { Boom } from '@hapi/boom';
-
 export class MessageHandler {
     client;
 

@@ -1,5 +1,6 @@
 import makeWASocket, { useMultiFileAuthState, fetchLatestBaileysVersion} from '@adiwajshing/baileys';
 import MAIN_LOGGER from '@adiwajshing/baileys/lib/Utils/logger';
+import { UpdateHandler } from '../utils/whatsapp/UpdateHandler'
 import { ConfigStorage } from '../utils/ConfigStorage';
 
 
@@ -11,7 +12,7 @@ export class WhatsApp {
     }
 
     async connectToWhatsApp() {
-        const { state } = await useMultiFileAuthState(
+        const { state, saveCreds } = await useMultiFileAuthState(
            ConfigStorage.saveSessionPath
         );
         const { version } = await fetchLatestBaileysVersion();
@@ -27,6 +28,6 @@ export class WhatsApp {
             auth: state,
         });
 
-        return client;
+        new UpdateHandler(client, saveCreds, this.isRegister).startHandler();
     }
 }
