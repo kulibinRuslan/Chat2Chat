@@ -1,8 +1,10 @@
 import { WhatsApp } from '../../clients/WhastApp';
+import { ConfigStorage } from '../ConfigStorage';
 
-export class Registration {
+export class Registration extends ConfigStorage {
     regNumber() {
-        const sock = new WhatsApp(true);
-        sock.connectToWhatsApp();
+        super.isRegister = true;
+        console.log('Запушен процесс регистрации')
+        new WhatsApp().connectToWhatsApp();
     }
 }

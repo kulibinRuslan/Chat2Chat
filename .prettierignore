@@ -2,3 +2,6 @@
 **/.svn
 **/.hg
 **/node_modules
+**/session
+
+*.js

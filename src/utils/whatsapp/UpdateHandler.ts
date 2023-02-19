@@ -6,28 +6,19 @@ import { Boom } from '@hapi/boom';
 import { toFile } from 'qrcode';
 import * as fs from 'fs';
 
-export class UpdateHandler {
-    saveCodePath: string = ConfigStorage.codeSavePath;
-    saveSessionPath: string = ConfigStorage.saveSessionPath;
-
-    isRegister = false;
-
+export class UpdateHandler extends ConfigStorage {
     saveCreds;
     client;
 
-    constructor(_client, _saveCreds, _isRegister: boolean) {
-        this.isRegister = _isRegister;
+    constructor(_client, _saveCreds) {
+        super();
         this.client = _client;
         this.saveCreds = _saveCreds;
     }
 
     async saveQr(qr) {
-        toFile(this.saveCodePath, [
-            {
-                data: qr,
-                mode: 'string',
-            },
-        ]);
+        toFile(this.codeSavePath, [{ data: qr, mode: 'string' }]);
+        console.log('QR код помещен в папку')
     }
 
     async remove() {
@@ -37,6 +28,12 @@ export class UpdateHandler {
             const err = e as Error;
             console.log(`${err.name}: ${err.message}`);
         }
+    }
+
+    async reconnect() {
+        setTimeout(async () => {
+            await new WhatsApp().connectToWhatsApp();
+        }, 3000);
     }
 
     async startHandler() {
@@ -52,35 +49,33 @@ export class UpdateHandler {
             }
 
             if (connection === 'close') {
-                console.log(
-                    `Соединение закрыто из за ${lastDisconnect?.error?.name}: ${lastDisconnect?.error?.message}`
-                );
+                console.log(`Соединение закрыто из за ${lastDisconnect?.error?.name}: ${lastDisconnect?.error?.message}`);
 
-                let shouldReconnect =
-                    (lastDisconnect?.error as Boom)?.output?.statusCode !==
-                    DisconnectReason.loggedOut;
+                let shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut;
 
-                const code = (lastDisconnect?.error as Boom)?.output
-                    ?.statusCode;
+                const code = (lastDisconnect?.error as Boom)?.output?.statusCode;
 
                 if (code == 403 || code == 401) {
-                    this.remove();
                     shouldReconnect = false;
+                    console.log('Сессия не валидна');
+                    this.remove();
+                    this.reconnect();
                 }
 
                 if (shouldReconnect) {
-                    await new WhatsApp(this.isRegister).connectToWhatsApp();
+                    this.reconnect();
                 }
             }
 
             if (connection == 'open') {
-                if (this.isRegister) {
+                if (super.isRegister) {
                     setTimeout(() => process.exit(), 3000);
+                    console.log('Регистрация завершена')
+                    
                 } else {
+                    console.log(1);
                     setTimeout(async () => {
-                        await new MessageHandler(
-                            this.client
-                        ).handleWhatsAppMessage();
+                        await new MessageHandler(this.client).handleWhatsAppMessage();
                     }, 5000);
                 }
             }

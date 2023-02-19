@@ -1,2 +1,1 @@
-npm install --dev
-npm install --production
+npm install --dev npm install --production
