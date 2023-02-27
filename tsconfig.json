@@ -1,13 +1,20 @@
 {
     "compilerOptions": {
-        "target": "es2018",
-        "module": "commonjs",
-        "outDir": "Chat2Chat",
+        "target": "es6",
+        "module": "CommonJS",
+
+        "types": [
+            "node",
+            "express"
+        ],
+        
+        "outDir": "./Chat2Chat",
         "lib": ["es2020", "esnext.array", "DOM"],
 
         "strict": false,
         "allowJs": false,
         "checkJs": false,
+        "sourceMap": true,
         "declaration": true,
         "skipLibCheck": true,
         "noImplicitThis": true,
@@ -19,7 +26,11 @@
         "forceConsistentCasingInFileNames": true
     },
 
-    "include": ["./src/**/*.ts"],
-    "exclude": ["node_modules"],
-    "types": ["node"]
+    "include": [
+        "./src/**/*.ts",
+    ],
+
+    "exclude": [
+        "./src/frontend/*",
+    ],
 }

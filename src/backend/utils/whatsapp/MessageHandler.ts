@@ -13,6 +13,7 @@ export class MessageHandler {
                     for (const msg of upsert.messages) {
                         if (!msg.key.fromMe) {
                             await this.client.readMessages([msg.key]);
+                            console.log([msg.message.conversation]);
                         }
                     }
                 }

@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { parse } from 'ini';
 
-const iniFile = parse(readFileSync('src/data/settings.ini', 'utf-8'));
+const iniFile = parse(readFileSync('backend/data/settings.ini', 'utf-8'));
 
 export abstract class ConfigStorage {
     protected codeSavePath: string = iniFile.codeSavePath;
