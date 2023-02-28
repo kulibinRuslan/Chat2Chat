@@ -1,6 +1,6 @@
 export declare abstract class ConfigStorage {
-    constructor();
     protected codeSavePath: string;
     protected saveSessionPath: string;
-    static isRegister: boolean;
+    protected BOT_TOKEN: string;
+    protected static isRegister: boolean;
 }
