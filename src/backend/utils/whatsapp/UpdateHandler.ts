@@ -68,12 +68,12 @@ export class UpdateHandler extends ConfigStorage {
             }
 
             if (connection == 'open') {
-                if (super.isRegister) {
+                console.log(ConfigStorage.isRegister);
+                if (ConfigStorage.isRegister) {
                     setTimeout(() => process.exit(), 3000);
                     console.log('Регистрация завершена')
                     
                 } else {
-                    console.log(1);
                     setTimeout(async () => {
                         await new MessageHandler(this.client).handleWhatsAppMessage();
                     }, 5000);

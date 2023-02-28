@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es2018",
         "module": "CommonJS",
 
         "types": [
@@ -28,9 +28,5 @@
 
     "include": [
         "./src/**/*.ts",
-    ],
-
-    "exclude": [
-        "./src/frontend/*",
     ],
 }
