@@ -1,4 +1,6 @@
 *.js
+*.ini
+Chat2Chat/
 
 # Logs
 logs

@@ -1,1 +1,0 @@
-{"version":3,"file":"Registation.js","sourceRoot":"","sources":["../../../../src/backend/utils/whatsapp/Registation.ts"],"names":[],"mappings":";;;AAAA,qDAAkD;AAClD,oDAAiD;AAEjD,MAAa,YAAa,SAAQ,6BAAa;IAC3C,SAAS;QACL,6BAAa,CAAC,UAAU,GAAG,IAAI,CAAC;QAChC,OAAO,CAAC,GAAG,CAAC,6BAA6B,CAAC,CAAC;QAC3C,IAAI,mBAAQ,EAAE,CAAC,iBAAiB,EAAE,CAAC;IACvC,CAAC;CACJ;AAND,oCAMC"}

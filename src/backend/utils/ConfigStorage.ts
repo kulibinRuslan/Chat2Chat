@@ -1,13 +1,14 @@
 import { readFileSync } from 'fs';
 import { parse } from 'ini';
 
-const iniFile = parse(readFileSync('backend/data/config.ini', 'utf-8'));
+const configFile = parse(readFileSync('backend/data/config.ini', 'utf-8'));
+const mailSettingsFile = parse(readFileSync(''));
 
 export abstract class ConfigStorage {
-    protected codeSavePath: string = iniFile.whatsapp.codeSavePath;
-    protected saveSessionPath: string = iniFile.whatsapp.saveSessionPath;
+    protected codeSavePath: string = configFile.whatsapp.codeSavePath;
+    protected saveSessionPath: string = configFile.whatsapp.saveSessionPath;
 
-    protected BOT_TOKEN: string = iniFile.telegram.BOT_TOKEN;
+    protected BOT_TOKEN: string = configFile.telegram.BOT_TOKEN;
 
     protected static isRegister = false;
 }
