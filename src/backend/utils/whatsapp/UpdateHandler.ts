@@ -9,7 +9,7 @@ import * as fs from 'fs';
 export class UpdateHandler extends ConfigStorage {
     async saveQr(qr) {
         toFile(this.codeSavePath, [{ data: qr, mode: 'string' }]);
-        console.log('QR код помещен в папку')
+        console.log('QR код помещен в папку');
     }
 
     async remove() {
@@ -61,8 +61,7 @@ export class UpdateHandler extends ConfigStorage {
             if (connection == 'open') {
                 if (ConfigStorage.isRegister) {
                     setTimeout(() => process.exit(), 3000);
-                    console.log('Регистрация завершена')
-                    
+                    console.log('Регистрация завершена');
                 } else {
                     setTimeout(async () => {
                         await MessageHandler.handleWhatsAppMessage(client);

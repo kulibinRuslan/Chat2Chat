@@ -1,5 +1,5 @@
 // import { Registration } from "./backend/utils/whatsapp/Registation";
-// new Registration().regNumber(); 
+// new Registration().regNumber();
 
 // ================================================================
 
@@ -8,12 +8,8 @@
 
 // ================================================================
 
-import { Telegram } from "./backend/clients/Telegram";
+import { Telegram } from './backend/clients/Telegram';
 new Telegram().connectToTelegram();
-
-
-
-
 
 // ================================================================
 
@@ -32,5 +28,3 @@ new Telegram().connectToTelegram();
 // app.listen(3000, () => {
 //   console.log('Server is listening on port 3000');
 // });
-
-

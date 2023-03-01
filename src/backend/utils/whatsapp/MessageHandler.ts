@@ -8,7 +8,7 @@ export class MessageHandler {
                         if (!msg.key.fromMe && msg.isGroup) {
                             // Получаем информацию о группе по jid
                             const chat = await client.getChatById(msg.key.remoteJid);
-                
+
                             // Проверяем имя группы
                             if (chat.name === 'Имя группы') {
                                 await client.readMessages([msg.key]);

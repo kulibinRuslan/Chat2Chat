@@ -1,5 +1,4 @@
-import { Telegram } from "../../clients/Telegram";
-
+import { Telegram } from '../../clients/Telegram';
 
 export class MessageHandler {
     static async handleTelegramMessage(client) {
@@ -12,5 +11,3 @@ export class MessageHandler {
         });
     }
 }
-
-
