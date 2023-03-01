@@ -1,31 +1,15 @@
-import { Registration } from "./backend/utils/whatsapp/Registation";
-new Registration().regNumber(); 
+// import { Registration } from "./backend/utils/whatsapp/Registation";
+// new Registration().regNumber(); 
 
 // ================================================================
 
 // import { WhatsApp } from "./backend/clients/WhastApp";
-// import { ConfigStorage } from "./backend/utils/ConfigStorage";
+// new WhatsApp().connectToWhatsApp();
 
-// export class Start extends ConfigStorage {
-//     startHandle() {
-//         super.isRegister = false;
-//         new WhatsApp().connectToWhatsApp();
-//     }
-// }
+// ================================================================
 
-// new Start().startHandle();
-
-
-
-
-
-
-
-
-
-
-
-
+import { Telegram } from "./backend/clients/Telegram";
+new Telegram().connectToTelegram();
 
 
 

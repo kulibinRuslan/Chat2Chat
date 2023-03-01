@@ -7,15 +7,6 @@ import { toFile } from 'qrcode';
 import * as fs from 'fs';
 
 export class UpdateHandler extends ConfigStorage {
-    saveCreds;
-    client;
-
-    constructor(_client, _saveCreds) {
-        super();
-        this.client = _client;
-        this.saveCreds = _saveCreds;
-    }
-
     async saveQr(qr) {
         toFile(this.codeSavePath, [{ data: qr, mode: 'string' }]);
         console.log('QR код помещен в папку')
@@ -36,12 +27,12 @@ export class UpdateHandler extends ConfigStorage {
         }, 3000);
     }
 
-    async startHandler() {
-        this.client.ev.on('creds.update', () => {
-            this.saveCreds();
+    async startHandler(client, saveCreds) {
+        client.ev.on('creds.update', () => {
+            saveCreds();
         });
 
-        this.client.ev.on('connection.update', async (update) => {
+        client.ev.on('connection.update', async (update) => {
             const { qr, connection, lastDisconnect } = update;
 
             if (qr) {
@@ -68,14 +59,13 @@ export class UpdateHandler extends ConfigStorage {
             }
 
             if (connection == 'open') {
-                console.log(ConfigStorage.isRegister);
                 if (ConfigStorage.isRegister) {
                     setTimeout(() => process.exit(), 3000);
                     console.log('Регистрация завершена')
                     
                 } else {
                     setTimeout(async () => {
-                        await new MessageHandler(this.client).handleWhatsAppMessage();
+                        await MessageHandler.handleWhatsAppMessage(client);
                     }, 5000);
                 }
             }
