@@ -1,3 +1,18 @@
+// ==============ТЕСТ РЕГИСТРАЦИИ АККАУНТА ВАТСАПА=================УСПЕШНО
+
+// import { AccountRegistration } from './backend/utils/whatsapp/AccountRegistation';
+// new AccountRegistration().regNumber();
+
+// ===============ТЕСТЫ ХАНДЛА СООБЩЕНИЙ ВАТСАПА===================
+
+import { ClientManager } from './backend/clients/ClientManager';
+import { MessageHandler as WhastAppMessageHandler } from './backend/utils/whatsapp/MessageHandler';
+
+let client = new ClientManager('WhatsApp');
+WhastAppMessageHandler.handleWhatsAppMessage(client);
+
+// ================================================================
+
 // import { Registration } from "./backend/utils/whatsapp/Registation";
 // new Registration().regNumber();
 
@@ -8,8 +23,8 @@
 
 // ================================================================
 
-import { Telegram } from './backend/clients/Telegram';
-new Telegram().connectToTelegram();
+// import { Telegram } from './backend/clients/Telegram';
+// new Telegram().connectToTelegram();
 
 // ================================================================
 

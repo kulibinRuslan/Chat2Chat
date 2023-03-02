@@ -1,5 +1,3 @@
-import { Telegram } from '../../clients/Telegram';
-
 export class MessageHandler {
     static async handleTelegramMessage(client) {
         const groupName = /^Тесты для ботов$/i;

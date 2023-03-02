@@ -19,6 +19,8 @@ export class WhatsApp extends ConfigStorage {
             auth: state,
         });
 
-        new UpdateHandler().startHandler(client, saveCreds);
+        let newClient = new UpdateHandler().startHandler(client, saveCreds);
+
+        return newClient;
     }
 }

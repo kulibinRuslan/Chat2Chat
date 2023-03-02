@@ -64,7 +64,8 @@ export class UpdateHandler extends ConfigStorage {
                     console.log('Регистрация завершена');
                 } else {
                     setTimeout(async () => {
-                        await MessageHandler.handleWhatsAppMessage(client);
+                        // await MessageHandler.handleWhatsAppMessage(client);
+                        return client;
                     }, 5000);
                 }
             }
