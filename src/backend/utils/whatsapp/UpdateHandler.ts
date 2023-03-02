@@ -28,47 +28,46 @@ export class UpdateHandler extends ConfigStorage {
     }
 
     async startHandler(client, saveCreds) {
-        client.ev.on('creds.update', () => {
-            saveCreds();
-        });
-
-        client.ev.on('connection.update', async (update) => {
-            const { qr, connection, lastDisconnect } = update;
-
-            if (qr) {
-                this.saveQr(qr);
-            }
-
-            if (connection === 'close') {
-                console.log(`Соединение закрыто из за ${lastDisconnect?.error?.name}: ${lastDisconnect?.error?.message}`);
-
-                let shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut;
-
-                const code = (lastDisconnect?.error as Boom)?.output?.statusCode;
-
-                if (code == 403 || code == 401) {
-                    shouldReconnect = false;
-                    console.log('Сессия не валидна');
-                    this.remove();
-                    this.reconnect();
+        return new Promise(async (resolve, reject) => {
+            client.ev.on('creds.update', () => {
+                saveCreds();
+            });
+    
+            client.ev.on('connection.update', async (update) => {
+                const { qr, connection, lastDisconnect } = update;
+    
+                if (qr) {
+                    this.saveQr(qr);
                 }
-
-                if (shouldReconnect) {
-                    this.reconnect();
+    
+                if (connection === 'close') {
+                    console.log(`Соединение закрыто из за ${lastDisconnect?.error?.name}: ${lastDisconnect?.error?.message}`);
+    
+                    let shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut;
+    
+                    const code = (lastDisconnect?.error as Boom)?.output?.statusCode;
+    
+                    if (code == 403 || code == 401) {
+                        shouldReconnect = false;
+                        console.log('Сессия не валидна');
+                        this.remove();
+                        this.reconnect();
+                    }
+    
+                    if (shouldReconnect) {
+                        this.reconnect();
+                    }
                 }
-            }
-
-            if (connection == 'open') {
-                if (ConfigStorage.isRegister) {
-                    setTimeout(() => process.exit(), 3000);
-                    console.log('Регистрация завершена');
-                } else {
-                    setTimeout(async () => {
-                        // await MessageHandler.handleWhatsAppMessage(client);
-                        return client;
-                    }, 5000);
+    
+                if (connection == 'open') {
+                    if (ConfigStorage.isRegister) {
+                        setTimeout(() => process.exit(), 3000);
+                        console.log('Регистрация завершена');
+                    } else {
+                        resolve(client);
+                    }
                 }
-            }
+            });
         });
     }
 }

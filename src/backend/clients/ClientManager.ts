@@ -8,15 +8,15 @@ export class ClientManager {
         this.messengerName = _messangerName;
     }
 
-    connectToMessanger() {
+    async connectToMessanger() {
         let client;
 
         switch (this.messengerName) {
             case 'Telegram':
-                client = new Telegram().connectToTelegram();
+                client = await new Telegram().connectToTelegram();
 
             case 'WhatsApp':
-                client = new WhatsApp().connectToWhatsApp();
+                client = await new WhatsApp().connectToWhatsApp();
         }
 
         return client;
