@@ -1,10 +1,12 @@
-export class MessageHandler {
-    static async handleTelegramMessage(client) {
-        const groupName = /^Тесты для ботов$/i;
+import { BaseHandler } from "../BaseHandler";
 
-        client.on('message', (msg) => {
-            if ((msg.chat.type === 'group' || msg.chat.type === 'supergroup') && groupName.test(msg.chat.title)) {
-                console.log(`Новое сообщение в группе ${msg.chat.title}: ${msg.text}`);
+export class MessageHandler extends BaseHandler{
+    async handleTelegramMessage() {
+        // const groupName = /^Тесты для ботов$/i;
+
+        this.client.on('message', (msg) => {
+            if (msg.chat.type === 'group' || msg.chat.type === 'supergroup') {
+                this.handle('message', msg.text)
             }
         });
     }

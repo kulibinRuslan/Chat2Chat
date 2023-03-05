@@ -1,6 +1,6 @@
 import { DisconnectReason } from '@adiwajshing/baileys';
 import { MessageHandler } from './MessageHandler';
-import { WhatsApp } from '../../clients/WhastApp';
+import { WhatsAppClient } from '../../clients/WhastAppClient';
 import { ConfigStorage } from '../ConfigStorage';
 import { Boom } from '@hapi/boom';
 import { toFile } from 'qrcode';
@@ -22,9 +22,9 @@ export class UpdateHandler extends ConfigStorage {
     }
 
     async reconnect() {
-        setTimeout(async () => {
-            await new WhatsApp().connectToWhatsApp();
-        }, 3000);
+        // setTimeout(async () => {
+        //     await new WhatsAppClient().connectToWhatsApp();
+        // }, 3000);
     }
 
     async startHandler(client, saveCreds) {
@@ -32,33 +32,33 @@ export class UpdateHandler extends ConfigStorage {
             client.ev.on('creds.update', () => {
                 saveCreds();
             });
-    
+
             client.ev.on('connection.update', async (update) => {
                 const { qr, connection, lastDisconnect } = update;
-    
+
                 if (qr) {
                     this.saveQr(qr);
                 }
-    
+
                 if (connection === 'close') {
                     console.log(`Соединение закрыто из за ${lastDisconnect?.error?.name}: ${lastDisconnect?.error?.message}`);
-    
+
                     let shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut;
-    
+
                     const code = (lastDisconnect?.error as Boom)?.output?.statusCode;
-    
+
                     if (code == 403 || code == 401) {
                         shouldReconnect = false;
                         console.log('Сессия не валидна');
                         this.remove();
                         this.reconnect();
                     }
-    
+
                     if (shouldReconnect) {
                         this.reconnect();
                     }
                 }
-    
+
                 if (connection == 'open') {
                     if (ConfigStorage.isRegister) {
                         setTimeout(() => process.exit(), 3000);

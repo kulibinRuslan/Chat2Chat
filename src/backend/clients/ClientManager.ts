@@ -1,24 +1,21 @@
-import { WhatsApp } from './WhastApp';
-import { Telegram } from './Telegram';
+import { WhatsAppClient } from './WhastAppClient';
+import { TelegramClient } from './TelegramClient';
+import { BaseClient } from './BaseClient';
 
 export class ClientManager {
-    messengerName: string;
+    static async connectToMessanger(messengerName): Promise<BaseClient | null | undefined> {
+        switch (messengerName) {
+            case Messenger.TELEGRAM:
+                return new TelegramClient()
 
-    constructor(_messangerName: string) {
-        this.messengerName = _messangerName;
-    }
-
-    async connectToMessanger() {
-        let client;
-
-        switch (this.messengerName) {
-            case 'Telegram':
-                client = await new Telegram().connectToTelegram();
-
-            case 'WhatsApp':
-                client = await new WhatsApp().connectToWhatsApp();
+            case Messenger.WHATSAPP:
+                // return await new WhatsAppClient().connectToWhatsApp();
+                break;
         }
-
-        return client;
     }
+}
+
+export enum Messenger {
+    TELEGRAM,
+    WHATSAPP
 }
