@@ -6,4 +6,6 @@ export abstract class BaseClient extends ConfigStorage {
     on(event, func) {
         this.handler.subscribe(event, func);
     }
+
+    
 }

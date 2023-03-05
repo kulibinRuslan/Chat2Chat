@@ -11,4 +11,6 @@ export abstract class ConfigStorage {
     protected BOT_TOKEN: string = configFile.telegram.BOT_TOKEN;
 
     protected static isRegister = false;
+
+    protected static sessionUpdate;
 }

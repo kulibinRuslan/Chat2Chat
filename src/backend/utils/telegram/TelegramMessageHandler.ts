@@ -1,6 +1,6 @@
 import { BaseHandler } from "../BaseHandler";
 
-export class MessageHandler extends BaseHandler{
+export class TelegramMessageHandler extends BaseHandler {
     async handleTelegramMessage() {
         // const groupName = /^Тесты для ботов$/i;
 

@@ -1,9 +1,9 @@
-// ==============ТЕСТ РЕГИСТРАЦИИ АККАУНТА ВАТСАПА=================УСПЕШНО
+// ==============ТЕСТ РЕГИСТРАЦИИ АККАУНТА ВАТСАПА=================ВСЕ УСТАРЕЛО НАХУЙ
 
 // import { AccountRegistration } from './backend/utils/whatsapp/AccountRegistation';
 // new AccountRegistration().regNumber();
 
-// ===============ТЕСТЫ ХАНДЛА СООБЩЕНИЙ ВАТСАПА===================УСПЕШНО
+// ===============ТЕСТЫ ХАНДЛА СООБЩЕНИЙ ВАТСАПА===================ВСЕ УСТАРЕЛО НАХУЙ
 
 // import { ClientManager as Client, Messenger } from './backend/clients/ClientManager';
 // import { MessageHandler as WhastAppMessageHandler } from './backend/utils/whatsapp/MessageHandler';
@@ -15,7 +15,7 @@
 
 // start1();
 
-// ==============ТЕСТЫ ХАНДЛА СООБЩЕНИЙ ТЕЛЕГРАА===================ВСЕ СЛОМАЛОСЬ НАХУЙ
+// ==============ТЕСТЫ ХАНДЛА СООБЩЕНИЙ ТЕЛЕГРАА===================УСПЕШНО
 
 import { ClientManager as Client, Messenger } from './backend/clients/ClientManager';
 
