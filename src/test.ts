@@ -1,20 +1,20 @@
-// ==============ТЕСТ РЕГИСТРАЦИИ АККАУНТА ВАТСАПА=================ВСЕ УСТАРЕЛО
+// ==============ТЕСТ РЕГИСТРАЦИИ АККАУНТА ВАТСАПА=================УСПЕШНО
 
-// import { AccountRegistration } from './backend/utils/whatsapp/AccountRegistation';
-// new AccountRegistration().regNumber();
+// import { WhatsAppAccountRegistration } from "./backend/utils/whatsapp/WhatsAppAccountRegistation";
+// new WhatsAppAccountRegistration().regNumber();
 
 // ===============ТЕСТЫ ХАНДЛА СООБЩЕНИЙ ВАТСАПА===================УСПЕШНО
 
-import { ClientManager as Client, Messenger } from './backend/clients/ClientManager';
+// import { ClientManager as Client, Messenger } from './backend/clients/ClientManager';
 
-function start1(){
-    let client = Client.connectToMessanger(Messenger.WHATSAPP);
-    client?.on('message', (msg) => {
-        console.log(msg);
-    });
-}
+// function start1(){
+//     let client = Client.connectToMessanger(Messenger.WHATSAPP);
+//     client?.on('message', (msg) => {
+//         console.log(msg);
+//     });
+// }
 
-start1();
+// start1();
 
 // ==============ТЕСТЫ ХАНДЛА СООБЩЕНИЙ ТЕЛЕГРАА===================УСПЕШНО
 

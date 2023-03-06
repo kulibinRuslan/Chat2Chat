@@ -1,6 +1,6 @@
 import { BaseHandler } from '../../BaseHandler';
 
-export class WhatsAppMessageHandler extends BaseHandler {
+export class WhatsappMessageHandler extends BaseHandler {
     async handleWhatsAppMessage() {
         this.client.ev.process(async (events) => {
             if (events['messages.upsert']) {

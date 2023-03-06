@@ -1,8 +1,9 @@
-import { WhatsAppSessionManager } from '../WhatsAppSessionManager';
+WhatsappSessionManager
 import { ConfigStorage } from '../../ConfigStorage';
 import { BaseHandler } from '../../BaseHandler';
+import { WhatsappSessionManager } from '../WhatsappSessionManager';
 
-export class WhatsAppUpdateHandler extends BaseHandler {
+export class WhatsappUpdateHandler extends BaseHandler {
     async startHandler() {
         this.client.ev.on('creds.update', () => {
             ConfigStorage.sessionUpdate();
@@ -12,11 +13,11 @@ export class WhatsAppUpdateHandler extends BaseHandler {
             const { qr, connection, lastDisconnect } = update;
 
             if (qr) {
-                new WhatsAppSessionManager().saveQrImage(qr);
+                new WhatsappSessionManager().saveQrImage(qr);
             }
 
-            if (connection === 'closed') {
-                this.handle('closed', lastDisconnect);
+            if (connection === 'close') {
+                this.handle('close', lastDisconnect);
             }
 
             if (connection === 'open') {

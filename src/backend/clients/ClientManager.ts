@@ -1,4 +1,4 @@
-import { WhatsAppClient } from './WhastAppClient';
+import { WhatsAppClient } from './WhastappClient';
 import { TelegramClient } from './TelegramClient';
 import { BaseClient } from './BaseClient';
 

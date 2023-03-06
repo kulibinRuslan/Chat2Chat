@@ -1,12 +1,13 @@
-import makeWASocket, { useMultiFileAuthState, fetchLatestBaileysVersion } from '@adiwajshing/baileys';
-import { WhatsAppMessageHandler } from '../utils/whatsapp/handlers/WhatsAppMessageHandler';
-import { WhatsAppUpdateHandler } from '../utils/whatsapp/handlers/WhatsAppUpdateHandler';
-import { WhatsAppErrorHandler } from '../utils/whatsapp/handlers/WhatsAppErrorHandler';
+import { WhatsappMessageHandler } from '../utils/whatsapp/handlers/WhatsAppMessageHandler';
+import { WhatsappUpdateHandler } from '../utils/whatsapp/handlers/WhatsAppUpdateHandler';
+import { WhatsappErrorHandler } from '../utils/whatsapp/handlers/WhatsAppErrorHandler';
+import makeWASocket, { useMultiFileAuthState } from '@adiwajshing/baileys';
 import MAIN_LOGGER from '@adiwajshing/baileys/lib/Utils/logger';
-import { BaseClient } from './BaseClient';
 import { ConfigStorage } from '../utils/ConfigStorage';
+import { BaseClient } from './BaseClient';
 
-export class WhatsAppClient extends BaseClient {
+
+export class WhatsappClient extends BaseClient {
     client;
     updateHandler;
     messageHandler;
@@ -36,9 +37,9 @@ export class WhatsAppClient extends BaseClient {
     async initialize() {
         await this.connectToWhatsApp();
 
-        this.updateHandler = this.connectHandler(new WhatsAppUpdateHandler(this.client));
-        this.messageHandler = this.connectHandler(new WhatsAppMessageHandler(this.client));
-        this.errorHandler = this.connectHandler(new WhatsAppErrorHandler(this.client));
+        this.updateHandler = this.connectHandler(new WhatsappUpdateHandler(this.client));
+        this.messageHandler = this.connectHandler(new WhatsappMessageHandler(this.client));
+        this.errorHandler = this.connectHandler(new WhatsappErrorHandler(this.client));
 
         this.updateHandler.startHandler();
 
@@ -46,7 +47,7 @@ export class WhatsAppClient extends BaseClient {
             this.messageHandler.handleWhatsAppMessage();
         });
 
-        this.on('closed', (lastDisconnect) => {
+        this.on('close', (lastDisconnect) => {
             this.errorHandler.handleErrors(lastDisconnect);
         });
     }

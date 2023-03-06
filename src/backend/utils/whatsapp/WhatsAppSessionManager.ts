@@ -1,9 +1,9 @@
-import { ClientManager } from '../../clients/ClientManager';
+import { ClientManager as Client, Messenger } from '../../clients/ClientManager';
 import { ConfigStorage } from '../ConfigStorage';
 import { toFile } from 'qrcode';
 import * as fs from 'fs';
 
-export class WhatsAppSessionManager extends ConfigStorage {
+export class WhatsappSessionManager extends ConfigStorage {
     async saveQrImage(qr) {
         toFile(this.codeSavePath, [{ data: qr, mode: 'string' }]);
         console.log('QR код помещен в папку');
@@ -14,6 +14,6 @@ export class WhatsAppSessionManager extends ConfigStorage {
     }
 
     reconnect() {
-        setTimeout('wefef', 2000);
+        setTimeout(Client.connectToMessanger, 2000, Messenger.WHATSAPP);
     }
 }
