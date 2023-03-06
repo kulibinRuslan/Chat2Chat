@@ -2,7 +2,7 @@ export abstract class BaseHandler {
     private subscribed: any[] = [];
     protected client;
 
-    constructor(_client){
+    constructor(_client) {
         this.client = _client;
     }
 
@@ -11,7 +11,7 @@ export abstract class BaseHandler {
     }
 
     handle(event, data) {
-        for(let i of this.subscribed.filter(x => x[0] == event)) {
+        for (let i of this.subscribed.filter((x) => x[0] == event)) {
             i[1](data);
         }
     }

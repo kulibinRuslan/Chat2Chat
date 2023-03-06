@@ -7,9 +7,9 @@ export class TelegramClient extends BaseClient {
 
     constructor() {
         super();
-        this.client = new TelegramBot(this.BOT_TOKEN, { polling: true });  
+        this.client = new TelegramBot(this.BOT_TOKEN, { polling: true });
 
-        this.handler = new TelegramMessageHandler(this.client);
-        this.handler.handleTelegramMessage();
+        const messageHandler = this.connectHandler(new TelegramMessageHandler(this.client));
+        messageHandler.handleTelegramMessage();
     }
 }

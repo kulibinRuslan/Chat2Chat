@@ -1,6 +1,6 @@
 import { ClientManager } from '../../clients/ClientManager';
 import { ConfigStorage } from '../ConfigStorage';
-import { toFile } from 'qrcode'; 
+import { toFile } from 'qrcode';
 import * as fs from 'fs';
 
 export class WhatsAppSessionManager extends ConfigStorage {
@@ -14,7 +14,6 @@ export class WhatsAppSessionManager extends ConfigStorage {
     }
 
     reconnect() {
-
         setTimeout('wefef', 2000);
     }
 }

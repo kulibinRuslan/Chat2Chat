@@ -1,4 +1,4 @@
-import { BaseHandler } from "../BaseHandler";
+import { BaseHandler } from '../../BaseHandler';
 
 export class WhatsAppMessageHandler extends BaseHandler {
     async handleWhatsAppMessage() {
@@ -9,7 +9,7 @@ export class WhatsAppMessageHandler extends BaseHandler {
                     for (const msg of upsert.messages) {
                         if (!msg.key.fromMe) {
                             this.client.readMessages([msg.key]);
-                            this.handle('message', [msg.message.conversation])
+                            this.handle('message', msg.message.conversation);
                         }
                     }
                 }
@@ -17,8 +17,6 @@ export class WhatsAppMessageHandler extends BaseHandler {
         });
     }
 }
-
-
 
 // client.ev.process(async (events) => {
 //     if (events['messages.upsert']) {
