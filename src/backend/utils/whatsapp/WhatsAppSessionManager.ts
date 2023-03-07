@@ -6,7 +6,6 @@ import * as fs from 'fs';
 export class WhatsappSessionManager extends ConfigStorage {
     async saveQrImage(qr) {
         toFile(this.codeSavePath, [{ data: qr, mode: 'string' }]);
-        console.log('QR код помещен в папку');
     }
 
     async removeSession() {

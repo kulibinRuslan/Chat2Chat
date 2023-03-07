@@ -1,4 +1,4 @@
-import { WhatsAppClient } from './WhastappClient';
+import { WhatsappClient } from './WhastappClient';
 import { TelegramClient } from './TelegramClient';
 import { BaseClient } from './BaseClient';
 
@@ -9,7 +9,7 @@ export class ClientManager {
                 return new TelegramClient();
 
             case Messenger.WHATSAPP:
-                return new WhatsAppClient();
+                return new WhatsappClient();
 
             default:
                 return null;

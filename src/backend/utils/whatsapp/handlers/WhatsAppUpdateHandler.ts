@@ -1,7 +1,7 @@
-WhatsappSessionManager
+import { WhatsappSessionManager } from '../WhatsappSessionManager';
 import { ConfigStorage } from '../../ConfigStorage';
 import { BaseHandler } from '../../BaseHandler';
-import { WhatsappSessionManager } from '../WhatsappSessionManager';
+
 
 export class WhatsappUpdateHandler extends BaseHandler {
     async startHandler() {
@@ -14,6 +14,7 @@ export class WhatsappUpdateHandler extends BaseHandler {
 
             if (qr) {
                 new WhatsappSessionManager().saveQrImage(qr);
+                this.handle('saveqr', undefined)
             }
 
             if (connection === 'close') {
@@ -23,7 +24,7 @@ export class WhatsappUpdateHandler extends BaseHandler {
             if (connection === 'open') {
                 if (ConfigStorage.isRegister) {
                     setTimeout(() => process.exit(), 3000);
-                    console.log('Регистрация завершена');
+                    this.handle('endreg', undefined)
                 } else {
                     this.handle('open', undefined);
                 }

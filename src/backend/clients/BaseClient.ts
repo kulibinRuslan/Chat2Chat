@@ -1,12 +1,12 @@
-import { ConfigStorage } from "../utils/ConfigStorage";
+import { ConfigStorage } from '../utils/ConfigStorage';
 
 export abstract class BaseClient extends ConfigStorage {
     handlers: any[] = [];
     events: any[] = [];
-    
+
     on(event, func) {
         for (let handler of this.handlers) {
-            handler.subscribe(event, func);    
+            handler.subscribe(event, func);
         }
 
         this.events.push([event, func]);
@@ -14,7 +14,7 @@ export abstract class BaseClient extends ConfigStorage {
 
     connectHandler(handler) {
         this.handlers.push(handler);
-        for(let i of this.events) {
+        for (let i of this.events) {
             handler.subscribe(i[0], i[1]);
         }
         return handler;

@@ -1,5 +1,5 @@
-import { WhatsappAccountRegistration } from "./whatsapp/WhatsAppAccountRegistation";
-import { ClientManager as Client, Messenger } from "../clients/ClientManager";
+import { WhatsappAccountRegistration } from './whatsapp/WhatsappAccountRegistation';
+import { ClientManager as Client, Messenger } from '../clients/ClientManager';
 
 export class ConnectionManager {
     static whatsappNumberRegistration() {

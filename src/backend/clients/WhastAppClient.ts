@@ -1,11 +1,10 @@
-import { WhatsappMessageHandler } from '../utils/whatsapp/handlers/WhatsAppMessageHandler';
-import { WhatsappUpdateHandler } from '../utils/whatsapp/handlers/WhatsAppUpdateHandler';
-import { WhatsappErrorHandler } from '../utils/whatsapp/handlers/WhatsAppErrorHandler';
+import { WhatsappMessageHandler } from '../utils/whatsapp/handlers/WhatsappMessageHandler';
+import { WhatsappUpdateHandler } from '../utils/whatsapp/handlers/WhatsappUpdateHandler';
+import { WhatsappErrorHandler } from '../utils/whatsapp/handlers/WhatsappErrorHandler';
 import makeWASocket, { useMultiFileAuthState } from '@adiwajshing/baileys';
 import MAIN_LOGGER from '@adiwajshing/baileys/lib/Utils/logger';
 import { ConfigStorage } from '../utils/ConfigStorage';
 import { BaseClient } from './BaseClient';
-
 
 export class WhatsappClient extends BaseClient {
     client;
@@ -15,7 +14,7 @@ export class WhatsappClient extends BaseClient {
 
     constructor() {
         super();
-        this.initialize();       
+        this.initialize();
     }
 
     async connectToWhatsApp() {
